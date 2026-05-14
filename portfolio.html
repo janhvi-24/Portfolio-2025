@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janhvi Katakdhond - AI & ML Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin-top: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero .highlight {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            border-radius: 2px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            background: rgba(30, 41, 59, 1);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            color: var(--text-secondary);
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2);
+            background: rgba(30, 41, 59, 1);
+        }
+
+        .project-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-footer {
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-content h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content .date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 4rem 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                margin-left: 0 !important;
+                padding-left: 70px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-item::before {
+                left: 8px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">JK</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="highlight">Janhvi</span></h1>
+            <p>AI & Machine Learning Engineer specializing in <strong>LLMs, GenAI, Deep Learning, and Computer Vision</strong></p>
+            <p>Building intelligent systems that solve real-world problems</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-title">About Me</div>
+        <div style="max-width: 800px; margin: 3rem auto; color: var(--text-secondary); line-height: 1.8;">
+            <p style="margin-bottom: 1.5rem;">
+                I'm an AI undergraduate at Vishwakarma Institute of Information Technical, Pune with a passion for building intelligent systems. My expertise spans across Machine Learning, Deep Learning, Large Language Models, NLP, and Computer Vision. I've worked on AI-based verification systems, explainable AI models, automation platforms, and research-oriented projects.
+            </p>
+            <p style="margin-bottom: 1.5rem;">
+                Currently serving as Director & Technical Lead at MakeTechBerry, I focus on developing cutting-edge AI solutions. My background includes internships at innovative tech companies like Pacify Technology and experience in both software development and AI research.
+            </p>
+            <p>
+                I'm passionate about leveraging AI to solve real-world challenges and am always eager to collaborate on projects that push the boundaries of what's possible with AI and machine learning.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-title">Technical Skills</div>
+        <div class="skills-grid">
+            <div class="skill-card fade-in">
+                <h3>AI & Machine Learning</h3>
+                <ul>
+                    <li>• Deep Learning & Neural Networks</li>
+                    <li>• LLMs & Generative AI</li>
+                    <li>• RAG & Agentic AI</li>
+                    <li>• TensorFlow & PyTorch</li>
+                    <li>• Scikit-learn & Pandas</li>
+                </ul>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h3>NLP & Computer Vision</h3>
+                <ul>
+                    <li>• Hugging Face & SpaCy</li>
+                    <li>• NLTK & LangChain</li>
+                    <li>• OpenCV & CNNs</li>
+                    <li>• OCR & Text Processing</li>
+                    <li>• Model Development</li>
+                </ul>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h3>Backend & Development</h3>
+                <ul>
+                    <li>• Python & SQL</li>
+                    <li>• REST APIs</li>
+                    <li>• Firebase & Supabase</li>
+                    <li>• Android (Java, Kotlin)</li>
+                    <li>• Git & GitHub</li>
+                </ul>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h3>Specializations</h3>
+                <ul>
+                    <li>• Data Preprocessing & Analysis</li>
+                    <li>• ML Pipelines</li>
+                    <li>• Explainable AI</li>
+                    <li>• Model Deployment</li>
+                    <li>• Problem Solving</li>
+                </ul>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h3>Tools & Platforms</h3>
+                <ul>
+                    <li>• VS Code & Jupyter Notebooks</li>
+                    <li>• Git & GitHub</li>
+                    <li>• Python & Jupyter</li>
+                    <li>• Data Visualization</li>
+                    <li>• Prompt Engineering</li>
+                </ul>
+            </div>
+
+            <div class="skill-card fade-in">
+                <h3>Soft Skills</h3>
+                <ul>
+                    <li>• Leadership & Teamwork</li>
+                    <li>• Analytical Thinking</li>
+                    <li>• Problem Solving</li>
+                    <li>• Communication</li>
+                    <li>• Research & Documentation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-title">Featured Projects</div>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Handwritten Examination Evaluation using LLMs & GenAI</h3>
+                    <p>Automated evaluation of handwritten exams using advanced LLMs and generative AI techniques.</p>
+                </div>
+                <div class="project-footer">
+                    <div class="project-tags">
+                        <span class="tag">LLMs</span>
+                        <span class="tag">GenAI</span>
+                        <span class="tag">OCR</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://github.com/janhvi-24/automated_grading_system" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Explainable AI-based Suicidal Ideation Detection</h3>
+                    <p>Deep learning model for detecting suicidal ideation with explainability features using SHAP.</p>
+                </div>
+                <div class="project-footer">
+                    <div class="project-tags">
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">SHAP</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://github.com/Vishayadav/SuicidalExpressionsClassification" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>AI-Based Identity Document Verification & Access Control</h3>
+                    <p>Secure identity verification system using computer vision and AI for access control.</p>
+                </div>
+                <div class="project-footer">
+                    <div class="project-tags">
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">OCR</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Security</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://github.com/suhanipandita/KYC_verification" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>AI-Driven Venture Registration & Authority Verification</h3>
+                    <p>Automated system for venture registration with AI-powered authority verification.</p>
+                </div>
+                <div class="project-footer">
+                    <div class="project-tags">
+                        <span class="tag">LLMs</span>
+                        <span class="tag">REST API</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://github.com/Yashdate10/Venture-Authentication-System" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Domain-Specific Content Moderation using Deep Learning</h3>
+                    <p>Advanced content moderation system using CNNs and NLP for domain-specific contexts.</p>
+                </div>
+                <div class="project-footer">
+                    <div class="project-tags">
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">CNNs</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">TensorFlow</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://github.com/mantashaicebear/maketech_content_verification" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <h3>Student Attendance System using Face Recognition</h3>
+                    <p>Automated attendance tracking system using facial recognition and deep learning.</p>
+                </div>
+                <div class="project-footer">
+                    <div class="project-tags">
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">Face Recognition</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://github.com/janhvi-24" class="project-link">View on GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-title">Experience & Education</div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Director & Technical Lead</h3>
+                    <p class="date">MakeTechBerry LLP • 2025 – Present</p>
+                    <p>Leading technical strategy and development of AI-powered solutions.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>AI Intern</h3>
+                    <p class="date">Pacify Technology, Mumbai • Jun 2024 – Aug 2024</p>
+                    <p>Developed and deployed AI models for production environments.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>B.Tech in Artificial Intelligence</h3>
+                    <p class="date">Vishwakarma Institute of Information Technology, Pune • 2023–2027</p>
+                    <p><strong>CGPA: 8.91/10</strong> - Specializing in AI, ML, Deep Learning, and NLP.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Diploma in Computer Science</h3>
+                    <p class="date">KJEI Trinity Polytechnic, Pune • 2021–2024</p>
+                    <p><strong>92.12%</strong> - Foundation in computer science and programming.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section style="padding: 3rem 2rem;">
+        <div class="section-title">Certifications</div>
+        <div style="max-width: 800px; margin: 3rem auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Advance Your Skills in Deep Learning and Neural Networks</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Professional certification in deep learning fundamentals.</p>
+                </div>
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Develop Your Skills with Large Language Models</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Advanced certification in LLM development and deployment.</p>
+                </div>
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">IBM Full Stack Software Developer</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Comprehensive full-stack development certification from IBM.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-section">
+            <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Let's Work Together</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
+                I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:janhvi@example.com" class="contact-link">
+                    <span>📧</span> Email
+                </a>
+                <a href="https://linkedin.com/in/janhvi-katakdhond-870614264" class="contact-link">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="https://github.com/janhvi-24" class="contact-link">
+                    <span>💻</span> GitHub
+                </a>
+                <a href="tel:+918767024218" class="contact-link">
+                    <span>📱</span> Phone
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; Janhvi Katakdhond. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-card, .project-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
